@@ -1,0 +1,15 @@
+Source: iptraf
+Section: net
+Priority: optional
+Maintainer: Frederic Peters <fpeters@debian.org>
+Build-Depends: debhelper (>= 5.0.0), libncurses-dev
+Standards-Version: 3.8.3.0
+
+Package: iptraf
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Interactive Colorful IP LAN Monitor
+ IPTraf is an ncurses-based IP LAN monitor that generates
+ various network statistics including TCP info, UDP counts,
+ ICMP and OSPF information, Ethernet load info, node stats,
+ IP checksum errors, and others.

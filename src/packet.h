@@ -29,10 +29,6 @@ Written by Gerard Paul Java
 #define ARPHRD_IEEE802_TR 800
 #endif
 
-#ifndef VLAN_ETH_HLEN
-#define VLAN_ETH_HLEN 18
-#endif
-
 extern int isdnfd;
 
 void open_socket(int *fd);

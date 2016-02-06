@@ -20,7 +20,6 @@ details.
 #include <stdlib.h>
 #include <string.h>
 #include <sys/ioctl.h>
-#include <linux/isdn.h>
 #include "isdntab.h"
 
 

@@ -32,7 +32,7 @@ details.
 #include <stdlib.h>
 #include <string.h>
 #include <netinet/in.h>
-#include <net/if.h>
+#include <linux/if.h>
 #include <linux/if_ether.h>
 #include "ifstats.h"
 #include "ifaces.h"
@@ -49,7 +49,7 @@ void init_promisc_list(struct promisc_states **list)
 {
     FILE *fd;
     int ifd;
-    char buf[8];
+    char buf[18];
     struct promisc_states *ptmp;
     struct promisc_states *tail = NULL;
     struct ifreq ifr;
@@ -81,6 +81,7 @@ void init_promisc_list(struct promisc_states **list)
              */
 
             if ((strncmp(buf, "eth", 3) == 0) ||
+	        (strncmp(buf, "ath", 3) == 0) ||
                 (strncmp(buf, "fddi", 4) == 0) ||
                 (strncmp(buf, "tr", 2) == 0) ||
                 (strncmp(ptmp->params.ifname, "wvlan", 4) == 0) ||

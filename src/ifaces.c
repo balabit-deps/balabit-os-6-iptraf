@@ -24,7 +24,7 @@ details.
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <net/if.h>
+#include <linux/if.h>
 #include <fcntl.h>
 #include <string.h>
 #include <linux/if_packet.h>
@@ -32,14 +32,15 @@ details.
 #include "error.h"
 
 extern int accept_unsupported_interfaces;
-#define NUM_SUPPORTED_IFACES 26
+#define NUM_SUPPORTED_IFACES 28
 
 extern int daemonized;
 
 char ifaces[][6] =
     { "lo", "eth", "sl", "ppp", "ippp", "plip", "fddi", "isdn", "dvb",
     "pvc", "hdlc", "ipsec", "sbni", "tr", "wvlan", "wlan", "sm2", "sm3",
-    "pent", "lec", "brg", "tun", "tap", "cipcb", "tunl", "vlan"
+    "pent", "lec", "brg", "tun", "tap", "cipcb", "tunl", "vlan", "ath",
+    "ra"
 };
 
 char *ltrim(char *buf)
@@ -49,7 +50,7 @@ char *ltrim(char *buf)
     while ((*tmp == ' ') || (*tmp == '\t'))
         tmp++;
 
-    strcpy(buf, tmp);
+    memmove(buf, tmp, strlen(tmp) + 1);
     return buf;
 }
 
@@ -102,7 +103,7 @@ void get_next_iface(FILE * fd, char *ifname)
 int iface_supported(char *iface)
 {
     int i;
-
+    
     if (accept_unsupported_interfaces)
         return 1;
 

@@ -12,19 +12,17 @@
 #include <fcntl.h>
 #include <curses.h>
 #include <panel.h>
-#include <netdb.h>
 #include <time.h>
 #include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <net/if_arp.h>
 #include <asm/types.h>
+#include <linux/socket.h>
+#include <sys/socket.h>
+#include <linux/net.h>
+#include <linux/if.h>
 #include <linux/if_packet.h>
 #include <linux/if_ether.h>
 #include <linux/if_fddi.h>
-#include <linux/if_tr.h>
-#include <net/if.h>
+#include <netinet/if_tr.h>
 #include <netinet/ip.h>
 #include <netinet/udp.h>
 #include "servname.h"
@@ -64,7 +62,7 @@ struct tcptableent {
     unsigned long finack;
     int partial;
     int finsent;
-    char ifname[8];
+    char ifname[18];
     unsigned int index;
     int reused;
     int timedout;

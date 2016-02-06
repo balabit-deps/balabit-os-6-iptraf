@@ -31,10 +31,11 @@ PROF		= #-pg
 # options to be passed to the compiler.  I don't believe they need to be
 # modified (except for -m486 on non-Intel x86 platforms).
 
-CFLAGS		= -Wall #-O2 #-m486
+CFLAGS		= -Wall -g #-O2 #-m486
 DIRS		= -DWORKDIR=\"$(WORKDIR)\" \
 		  -DLOGDIR=\"$(LOGDIR)\" -DEXECDIR=\"$(TARGET)\"
 LDOPTS		= #-static
+
 
 # you may want to change this to point to your ncurses include directory
 # if the ncurses include files are not in the default location.
@@ -79,17 +80,6 @@ WORKDIR		= /var/local/iptraf
 # This definition overrides dirs.h
 
 LOGDIR		= /var/log/iptraf
-
-#
-# IPTraf lock file directory.  This is /var/run/iptraf/ and will not
-# be passed to the compiler.  If you want to change this, you must edit
-# dirs.h.
-#
-# ******************** !!!!!! WARNING !!!!!! ********************
-# DO NOT MAKE THIS POINT TO AN EXISTING/SYSTEM DIRECTORY!!!!  THE
-# LOCK OVERRIDE (iptraf -f) WILL ERASE FILES HERE!
-#*****************************************************************
-LOCKDIR		= /var/run/iptraf
 
 #####################################################################
 ############### IPTRAF COMPILATION AND LINK RULES
@@ -139,13 +129,11 @@ clean:
 
 cleano:
 	rm -f *.o *~
-	strip iptraf
-	strip rvnamed
 
 # installation rule
 
 install:
-	@./install.sh $(TARGET) $(WORKDIR) $(LOGDIR) $(LOCKDIR)
+	@./install.sh $(TARGET) $(WORKDIR) $(LOGDIR) $(DESTDIR)
 
 # Upgrade rule
 #
@@ -170,7 +158,6 @@ dist-bin: all
 	/bin/cp -pR ../Documentation $(BINDIR)
 	mkdir $(BINDIR)/src
 	/bin/cp -p $(BINS) Makefile install.sh version $(BINDIR)/src
-	strip $(BINDIR)/src/iptraf $(BINDIR)/src/rvnamed $(BINDIR)/src/rawtime
 
 #$(BINDIR)/src/updatefilters
 

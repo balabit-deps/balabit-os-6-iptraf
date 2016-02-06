@@ -1,0 +1,78 @@
+#!/usr/bin/make -f
+# Made with the aid of dh_make, by Craig Small
+# Sample debian/rules that uses debhelper. GNU copyright 1997 by Joey Hess.
+# Some lines taken from debmake, by Cristoph Lameter.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+makeopts      := \
+		 WORKDIR=/var/lib/iptraf			\
+		 LOGDIR=/var/log/iptraf				\
+		 TARGET=/usr/sbin				\
+		 DESTDIR=$(shell pwd)/debian/iptraf
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+
+	# Add here commands to compile the package.
+	cd src; make $(makeopts)
+	
+	cp Documentation/README README.Documentation
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	rm -f README.Documentation
+
+	# Add here commands to clean up after the build process.
+	-cd src; make clean
+	dh_clean
+
+# Build architecture-independent files here.
+binary-indep: build
+
+# Build architecture-dependent files here.
+binary-arch: build
+#	dh_testversion
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# commands to install the files into debian/iptraf
+	cp debian/iptraf-manual debian/iptraf/usr/share/doc-base/iptraf
+
+	cd src; $(MAKE) install $(makeopts)
+
+	dh_installdocs
+	dh_installmenu
+	dh_installlogrotate
+	dh_installman -A
+	dh_installchangelogs	CHANGES
+
+	mkdir debian/iptraf/usr/share/doc/iptraf/html
+	mkdir debian/iptraf/usr/share/doc/iptraf/html/stylesheet-images/
+	cp Documentation/*.html debian/iptraf/usr/share/doc/iptraf/html/
+	cp Documentation/stylesheet-images/*.gif debian/iptraf/usr/share/doc/iptraf/html/stylesheet-images/
+	dh_strip
+	dh_compress
+	dh_fixperms
+	chmod 0750 debian/iptraf/var/log/iptraf
+
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+source diff:                                                                  
+	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary
+

@@ -1,0 +1,463 @@
+iptraf (3.0.0-8.1build1) xenial; urgency=medium
+
+  * No-change rebuild for ncurses6 transition.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sat, 06 Feb 2016 20:53:03 +0000
+
+iptraf (3.0.0-8.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Patched to use netinet/if_tr.h instead of linux/if_tr.h.
+    Linux kernel dropped tokenring if_tr.h headers in upstream commit
+    ee446fd5e6dafee4a16fd1bd345d2571dcfd6f5d. Use netinet/if_tr.h instead
+    of linux/if_tr.h to fix FTBFS with recent kernels.
+    Thanks to Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+    (Closes: #688668)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 03 Oct 2012 11:56:19 +0200
+
+iptraf (3.0.0-8) unstable; urgency=low
+
+  * src/ifaces.c: fix strcpy bug (patch by Thomas Themel) (closes: #590526)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 31 Jul 2011 13:50:48 +0200
+
+iptraf (3.0.0-7) unstable; urgency=low
+
+  * src/packet.[ch], src/links.h, src/hostmon.c: remove special casing of VLAN
+    interfaces (closes: #415616)
+  * debian/prerm: removed as all it did was calling out to install-docs
+  * debian/postinst: removed the call to install-docs
+  * debian/dirs, src/Makefile, src/install.sh: don't create /var/run/iptraf/
+    in package, it will be created automatically when iptraf is run
+  * debian/control: don't build depends on -1 revision
+  * debian/control: bump standards version
+  * debian/iptraf-manual: fixed documentation section
+  * Documentation/iptraf.8: fixed Groff warning in manpage
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 13 Sep 2009 14:36:18 +0200
+
+iptraf (3.0.0-6) unstable; urgency=low
+
+  * src/ifaces.c: added support for raX interfaces (closes: #281315)
+  * debian/menu: updated to new menu policy (froms Apps/Net to Applications /
+    Network / Monitoring)
+  * src/iptraf.c: added call to setlocale() (closes: #328186, #327147)  (that
+    I couldn't reproduce anyway)
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 29 Sep 2007 12:42:56 +0200
+
+iptraf (3.0.0-5) unstable; urgency=low
+
+  * src/Makefile, src/install.sh: always use -g, and don't strip binaries
+    (closes: #437229)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 15 Aug 2007 15:36:49 +0200
+
+iptraf (3.0.0-4) unstable; urgency=low
+
+  * src/ifaces.c: incremented NUM_SUPPORTED_IFACES so that ath devices are
+    recognised correctly. (closes: #413212)
+
+ -- Frederic Peters <fpeters@debian.org>  Sat,  3 Mar 2007 13:35:58 +0100
+
+iptraf (3.0.0-3) unstable; urgency=low
+
+  * Sync with Ubuntu fixes (by Oliver Grawert and Michael Vogt)
+    * added fix for /var/run detection (since it is a tmpfs by default on
+      Ubuntu) [and fixed ubuntu fix]
+    * added support for ath devices
+    * fixed FTBFS by changing linux/if_tr.h to netinet/if_tr.h
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 15 Oct 2006 13:34:14 +0200
+
+iptraf (3.0.0-2) unstable; urgency=low
+
+  * src/ifaces.c: remove duplicated patch, it had been applied upstream and I
+    missed it. (closes: #379539)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 24 Jul 2006 11:02:29 +0200
+
+iptraf (3.0.0-1) unstable; urgency=low
+
+  * New upstream release. (closes: #370577)
+    * Oops, I missed it, thansk for the bug report.
+    * Updated patches to work against this version.
+    * Supports vlan interfaces (closes: #168202, #226577)
+    * Supports bridged interfaces (closes: #215535)
+  * debian/copyright: updated copyright & license information.
+  * debian/rules: partly updated to newer debhelper helpers.
+
+ -- Frederic Peters <fpeters@debian.org>  Tue,  6 Jun 2006 07:36:49 +0200
+
+iptraf (2.7.0-8) unstable; urgency=low
+
+  * src/*.[ch]: shaked up headers so it compiles with current libc and linux
+    headers (closes: #323319)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 16 Aug 2005 10:24:50 +0200
+
+iptraf (2.7.0-7) unstable; urgency=low
+
+  * Documentation/iptraf.8: use \- to denote the dash signs before options.
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 26 Feb 2005 10:37:01 +0100
+
+iptraf (2.7.0-6) unstable; urgency=low
+
+  * Creates rvnamed sockets in /var/run/ (closes: #272958)
+  * debian/menu: quote needs and section.
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 23 Sep 2004 10:05:55 +0200
+
+iptraf (2.7.0-5) unstable; urgency=low
+
+  * Include bits from <linux/isdn.h> to get iptraf working without inclusion
+    of this kernel header (closes: #219757)
+  * Do not test for TERM if running daemonized (closes: #222525)
+  * Document -u in the manpage (closes: #147447, #199888)
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 11 Dec 2003 13:45:00 +0100
+
+iptraf (2.7.0-4) unstable; urgency=low
+
+  * debian/menu: fixed su-to-root in menu item (closes: #188078)
+  * debian/control: removed note about Linux kernel >= 2.2
+  * debian/control: updated policy to 3.6.1.0, no changes needed.
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 30 Aug 2003 23:16:41 +0200
+
+iptraf (2.7.0-3) unstable; urgency=low
+
+  * Added support for vlan interfaces. (patch by Ard van Breemen)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 11 Nov 2002 17:52:22 +0100
+
+iptraf (2.7.0-2) unstable; urgency=low
+
+  * debian/iptraf-manual: there is no longer a plain text manual.
+    (closes: #149648)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 11 Jun 2002 11:40:45 +0200
+
+iptraf (2.7.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Upstream fixes detailed interface statitistics screen. (closes: #146851)
+  * Upstream has support for renamed interfaces. (closes: #128175)
+    but no documentation for it (doesn't close: 147447...)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 22 May 2002 09:31:32 +0200
+
+iptraf (2.6.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Upstream added percentage broadcast packet. (closes: #119915)
+  * Upstream applied my patch for renamed interfaces. (closes: #128175)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed,  1 May 2002 11:46:31 +0200
+
+iptraf (2.5.0-4) unstable; urgency=low
+
+  * debian/logrotate: s/USR/USR1/ (closes: #131106)
+  * No longer hangs with resolver daemon (closes: #83522)
+  * debian/postrm: remove /var/run/iptraf on purge (closes: #129907)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 27 Jan 2002 13:51:48 +0100
+
+iptraf (2.5.0-3) unstable; urgency=low
+
+  * debian/postinst: fixed spelling mistake itpraf -> iptraf. Caused old
+    script to rotate logs not to be renamed. (closes: #129744)
+
+ -- Frederic Peters <fpeters@debian.org>  Fri, 18 Jan 2002 12:33:38 +0100
+
+iptraf (2.5.0-2) unstable; urgency=low
+
+  * debian/menu: use su-to-root to launch iptraf from menu. (closes: #128144)
+  * debian/doc: removed README.Documentation since it talks about installing
+    documentation and this is already done by the package. (closes: #126932)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon,  7 Jan 2002 21:31:09 +0100
+
+iptraf (2.5.0-1) unstable; urgency=low
+
+  * New upstream release. (closes: #125726)
+  * Upstream source tarball no longer contains compiled binaries.
+    (closes: #122677)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 19 Dec 2001 10:10:07 +0100
+
+iptraf (2.4.0-4) unstable; urgency=low
+
+  * debian/logrotate: don't fail if iptraf is not running. (closes: #122692)
+  * debian/copyright: corrected licences -> licenses
+
+ -- Frederic Peters <fpeters@debian.org>  Thu,  6 Dec 2001 19:17:39 +0100
+
+iptraf (2.4.0-3) unstable; urgency=low
+
+  * debian/logrotate: added USR1 signal sending after logrotate rotated the
+    logfiles. (notification by Sebastian Henschel <shensche@defcom.de>)
+  * debian/changelog: removed emacs cruft from the end of the file.
+  * src/Makefile: removed -g from gcc flags.
+  * debian/rules, src/Makefile: added support for DEB_BUILD_OPTIONS
+  * debian/control: updated Standard-Versions to 3.5.6.0
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 27 Nov 2001 13:36:37 +0100
+
+iptraf (2.4.0-2) unstable; urgency=low
+
+  * Fixed logfile directory location in rvnamed manpage (Closes: #99455)
+  * Added support for lec interfaces.
+
+ -- Frederic Peters <fpeters@debian.org>  Mon,  2 Jul 2001 11:34:39 +0200
+
+iptraf (2.4.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Upstream includes /etc/ethers patch.
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 11 Apr 2001 11:19:26 +0200
+
+iptraf (2.3.1-2) unstable; urgency=low
+
+  * Patched so it can use /etc/ethers like tcpdump (Closes: #32134)
+  * debian/postinst: as a consequence it no longer creates ethernet.desc
+    from an existing /etc/ethers
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 19 Dec 2000 20:35:25 +0100
+
+iptraf (2.3.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Frederic Peters <fpeters@debian.org>  Sat,  9 Dec 2000 16:42:35 +0100
+
+iptraf (2.2.2-3) unstable; urgency=high
+
+  * applied patch to support wvlan interfaces (patch by eichin@thok.org)
+    (closes: #70875)
+  * fixed rvnamed so it doesn't segfault (and makes iptraf locking up)
+    when /var/log/iptraf doesn't exist. (closes: #71487)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 27 Nov 2000 18:21:21 +0100
+
+iptraf (2.2.2-2) unstable; urgency=high
+
+  * debian/rules: rename old /etc/cron.daily/iptraf to /e/c.d/iptraf.obsolete
+    since we now use logrotate (and dpkg won't remove it automatically)
+    (closes: #72998)
+  * debian/logrotate: added notifempty statemente
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 16 Oct 2000 22:37:54 +0200
+
+iptraf (2.2.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 24 Aug 2000 19:22:07 +0200
+
+iptraf (2.1.1-5) unstable; urgency=low
+
+  * create log directory in postinst since it will only be removed by purge
+    (ie not remove) (closes: #58961)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed,  1 Mar 2000 15:08:34 +0100
+
+iptraf (2.1.1-4) frozen unstable; urgency=high
+
+  * recompiled against libncurses5
+  * debian/control: fixed Build-Depends line (libncurses4-dev has been
+    replaced by libncurses-dev)/ (closes: #56376)
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 29 Jan 2000 01:50:53 +0100
+
+iptraf (2.1.1-3) frozen unstable; urgency=low
+
+  * debian/postinst: iptraf wouldn't install because of /var/state/iptraf
+    no longer existing. (closes: #56147)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 25 Jan 2000 23:14:25 +0100
+
+iptraf (2.1.1-2) unstable; urgency=low
+
+  * /var/lib/iptraf was not created
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 21 Dec 1999 17:10:40 +0100
+ 
+iptraf (2.1.1-1) unstable; urgency=high
+
+  * Maintainer upload :)
+  * Closes: #52341 and #52837 (rvnamed not working)
+  * Closes: #52548 (/usr/doc/iptraf not existing)
+  * Closes: #51801 (make building in live fs)
+
+ -- Frederic Peters <fpeters@debian.org>  Fri, 17 Dec 1999 17:45:57 +0100
+ 
+iptraf (2.1.1-0.2) unstable; urgency=low
+
+  * Another NMU requested by Frederic.
+  * debian/postinst: Fixed move from /var/lib/iptraf to /var/state/iptraf 
+    to work in all cases (closes: #51712).
+  * debian/postinst: Commented out the config file conversion tools.
+    I can't get them to compile anymore :(
+
+ -- Torsten Landschoff <torsten@debian.org>  Sat,  4 Dec 1999 12:04:51 +0100
+
+iptraf (2.1.1-0.1) unstable; urgency=low
+
+  * Debian QA Upload as requested by Frederic.
+  * New upstream release (closes: #50804).
+  * New features:
+    - New filter for non-IP packages (closes: #44420).
+    - Ctrl-L does redraw the screen now (closes: #43848).
+  * debian/control: Added Build-Depends, updated Standards-Version.
+  * debian/rules: Updated to adjust for changes in upstream source:
+  * Removed the old configfile conversion tools. I don't think they 
+    are worth the effort.
+
+ -- Torsten Landschoff <torsten@debian.org>  Tue, 23 Nov 1999 17:49:23 +0100
+
+iptraf (2.0.2-5) unstable; urgency=low
+
+  * Added 'missingok' to logrotate.d/iptraf . (bug#44794)
+
+ -- Frederic Peters <fpeters@debian.org>  Fri, 10 Sep 1999 20:14:56 +0200
+
+iptraf (2.0.2-4) unstable; urgency=low
+
+  * Updated debian/rules to build with newer debhelper
+
+ -- Frederic Peters <fpeters@debian.org>  Thu,  9 Sep 1999 18:32:00 +0200
+
+iptraf (2.0.2-3) unstable; urgency=low
+
+  * Moved to logrotate (it should now be compliant with policy 3.0.1)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun,  5 Sep 1999 19:56:59 +0200
+
+iptraf (2.0.2-2) unstable; urgency=low
+
+  * Fixed postinst removal of /etc/iptraf.cfg (Bug#43625)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 29 Aug 1999 02:32:41 +0200
+
+iptraf (2.0.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 29 Jul 1999 22:48:35 +0200
+
+iptraf (1.4.2-2) unstable; urgency=low
+
+  * debian/rules : fixed a few errors (Fixes Bug#32265)
+  * debian/postinst : improved handling of converting format from
+    older releases
+  * Converting /etc/ethers (from tcpdump) to iptraf's ethernet.desc
+    (Fixes Bug#32134)
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 30 Jan 1999 17:52:27 +0100
+ 
+iptraf (1.4.2-1) unstable; urgency=low
+
+  * New upstream release (Fixes Bug#31805)
+  * Switched to debhelper
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 18 Jan 1999 16:47:38 +0100
+ 
+iptraf (1.4.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Frederic Peters <fpeters@debian.org>  Mon,  4 Jan 1999 19:59:53 +0100
+
+iptraf (1.3.0-5) frozen unstable; urgency=low
+
+  * Fixed a typo in postrm (Bug#30559)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 13 Dec 1998 18:45:31 +0100
+
+iptraf (1.3.0-4.1) unstable; urgency=low
+
+  * non-maintainer (binary-only) upload for Alpha
+  * make 3.77-2 apparently doesn't like `*.h' as target
+
+ -- Paul Slootman <paul@debian.org>  Mon, 12 Oct 1998 20:41:28 +0200
+
+iptraf (1.3.0-4) unstable; urgency=low
+
+  * (Re) Added daily maintenance of log file.
+
+ -- Frederic Peters <fpeters@debian.org>  Mon,  5 Oct 1998 21:40:04 +0200
+
+iptraf (1.3.0-3) unstable; urgency=low
+
+  * New versions aren't just for Alpha people :)
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 24 Sep 1998 23:04:33 +0200
+
+iptraf (1.3.0-2.1) unstable; urgency=low
+
+  * non-maintainer (binary-only) upload for Alpha
+  * fixed creation of /var/log/iptraf (should be $DESTDIR/var/log/iptraf)
+
+ -- Paul Slootman <paul@debian.org>  Thu, 24 Sep 1998 00:31:19 +0200
+
+iptraf (1.3.0-2) unstable; urgency=low
+
+  * Made it upgrade right from both 1.1 and 1.2 releases.
+  * Version 1.3.0 brings a warning message at startup when IP Masquerading is enabled in the kernel. This can be boring so I add a new switch (-q).
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 21 Sep 1998 08:11:33 +0200
+
+iptraf (1.3.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 20 Sep 1998 22:57:54 +0200
+
+iptraf (1.2.0-2) unstable; urgency=low
+
+  * Added PLIP to included interfaces (fixes #26376)
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 19 Sep 1998 11:08:24 +0200
+
+iptraf (1.2.0-1) unstable; urgency=low
+
+  * New maintainer.
+  * New upstream release.
+  * Moved configuration files from /var/lib/iptraf/ to /etc/iptraf/.
+  * Moved log files from /var/lib/iptraf/ to /var/log/.
+  * Removed '-m486' flag in Makefile (fixes #20989).
+  * Created man pages.
+  * Added doc-base support.
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 27 Jun 1998 15:30:28 +0200
+
+iptraf (1.1.0-3) unstable; urgency=low
+
+  * New maintainer.
+  * Many new improvements to package design.
+
+ -- Robert S. Edmonds <edmonds@freewwweb.com>  Mon,  6 Apr 1998 18:16:04 -0400
+
+iptraf (1.1.0-2) unstable; urgency=low
+
+  * path to rvnamed was wrong and thus rvnamed was not loaded when needed.
+  * Clean up *.rej files. Sigh.
+
+ -- Christoph Lameter <chris@waterf.org>  Sat, 28 Feb 1998 09:13:59 -0800
+
+iptraf (1.1.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Christoph Lameter <chris@waterf.org>  Sat, 28 Feb 1998 07:53:14 -0800
+
+iptraf (1.0-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Christoph Lameter <chris@waterf.org>  Sat,  3 Jan 1998 21:59:02 -0800
+

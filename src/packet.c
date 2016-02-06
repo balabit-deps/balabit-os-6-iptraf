@@ -31,13 +31,12 @@ details.
 #include <netinet/tcp.h>
 #include <sys/time.h>
 #include <net/if_arp.h>
-#include <net/if.h>
+#include <linux/if.h>
 #include <sys/ioctl.h>
 #include <linux/if_packet.h>
 #include <linux/if_ether.h>
 #include <linux/if_fddi.h>
-#include <linux/if_tr.h>
-#include <linux/isdn.h>
+#include <netinet/if_tr.h>
 #include <linux/sockios.h>
 #include <msgboxes.h>
 #include "deskman.h"
@@ -79,6 +78,8 @@ unsigned short getlinktype(unsigned short family, char *ifname,
     case ARPHRD_ETHER:
         if (strncmp(ifname, "eth", 3) == 0)
             result = LINK_ETHERNET;
+	else if (strncmp(ifname, "ath", 3) == 0)
+	    result = LINK_ETHERNET;
         else if (strncmp(ifname, "plip", 4) == 0)
             result = LINK_PLIP;
         else if (strncmp(ifname, "fddi", 4) == 0)       /* For some Ethernet- */
@@ -101,8 +102,10 @@ unsigned short getlinktype(unsigned short family, char *ifname,
             result = LINK_ETHERNET;
         else if (strncmp(ifname, "tun", 3) == 0)
             result = LINK_ETHERNET;
+        else if (strncmp(ifname, "ra", 2) == 0)
+            result = LINK_ETHERNET;
         else if (strncmp(ifname, "vlan", 3) == 0)
-            result = LINK_VLAN;
+            result = LINK_ETHERNET;
         else if (strncmp(ifname, "brg", 3) == 0)
             result = LINK_ETHERNET;
         else if (strncmp(ifname, "tap", 3) == 0)
@@ -227,14 +230,6 @@ void adjustpacket(char *tpacket, unsigned short family,
     case LINK_IPIP:
         *packet = tpacket;
         break;
-    case LINK_VLAN:
-        *packet = tpacket + VLAN_ETH_HLEN;
-        readlen -= VLAN_ETH_HLEN;
-        /*
-         * Move IP datagram into an aligned buffer.
-         */
-        memmove(aligned_buf, *packet, min(SNAPSHOT_LEN, *readlen));
-        *packet = aligned_buf;
     default:
         *packet = (char *) NULL;        /* return a NULL packet to signal */
         break;                  /* an unrecognized link protocol */

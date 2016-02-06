@@ -219,6 +219,9 @@ int main(void)
     signal(SIGCHLD, childreap);
 
     logfile = fopen(RVNDLOGFILE, "a");
+    if ( logfile == NULL ) { /* unable to open file -> /dev/null */
+	logfile = fopen("/dev/null", "a");
+    }
 
     if (logfile == NULL)
         logfile = fopen("/dev/null", "a");

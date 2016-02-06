@@ -16,14 +16,28 @@ details.
 
 ***/
 
+/* ARP protocol opcodes. */
+#define ARPOP_REQUEST   1               /* ARP request.  */
+#define ARPOP_REPLY     2               /* ARP reply.  */
+#define ARPOP_RREQUEST  3               /* RARP request.  */
+#define ARPOP_RREPLY    4               /* RARP reply.  */
+#define ARPOP_InREQUEST 8               /* InARP request.  */
+#define ARPOP_InREPLY   9               /* InARP reply.  */
+#define ARPOP_NAK       10              /* (ATM)ARP NAK.  */
+
+
 #include <asm/types.h>
-#include <linux/if_ether.h>
-#include <linux/if_tr.h>
-#include <linux/if_fddi.h>
-#include <winops.h>
-#include "arphdr.h"
 #include "options.h"
 #include "tcptable.h"
+/*#include <linux/socket.h>*/
+#include <linux/if.h>
+#include <linux/if_ether.h>
+#include <netinet/if_tr.h>
+#include <linux/if_fddi.h>
+#include <linux/if_arp.h>
+#include <netdb.h>
+#include <winops.h>
+#include "arphdr.h"
 #include "othptab.h"
 #include "deskman.h"
 #include "attrs.h"

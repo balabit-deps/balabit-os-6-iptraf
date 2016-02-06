@@ -17,38 +17,32 @@ INSTALL=/usr/bin/install
 TARGET=$1
 WORKDIR=$2
 LOGDIR=$3
-LOCKDIR=$4
+DESTDIR=$4
 
 echo
 echo "*** Installing executable programs and preparing work directories"
 echo
 echo ">>> Installing iptraf in $TARGET"
-$INSTALL -m 0700 -o root -g root -s iptraf $TARGET
+$INSTALL -m 0700 -o root -g root iptraf $DESTDIR/$TARGET
 echo ">>> Installing rvnamed in $TARGET"
-$INSTALL -m 0700 -o root -g root -s rvnamed $TARGET
+$INSTALL -m 0700 -o root -g root rvnamed $DESTDIR/$TARGET
 
-if [ ! -d $WORKDIR ]; then
+if [ ! -d $DESTDIR/$WORKDIR ]; then
     echo ">>> Creating IPTraf work directory $WORKDIR"
 else
     echo ">>> IPTraf work directory $WORKDIR already exists"
-    rm -f $WORKDIR/othfilter.dat
+    rm -f $DESTDIR/$WORKDIR/othfilter.dat
 fi
 
-$INSTALL -m 0700 -o root -g root -d $WORKDIR
+$INSTALL -m 0700 -o root -g root -d $DESTDIR/$WORKDIR
 
-if [ ! -d $LOGDIR ]; then
+if [ ! -d $DESTDIR/$LOGDIR ]; then
     echo ">>> Creating IPTraf log directory $LOGDIR"
 else
     echo ">>> IPTraf log directory $LOGDIR already exists"
 fi
-$INSTALL -m 0700 -o root -g root -d $LOGDIR
+$INSTALL -m 0700 -o root -g root -d $DESTDIR/$LOGDIR
 
-if [ ! -d $LOCKDIR ]; then
-    echo ">>> Creating IPTraf lockfile directory $LOCKDIR"
-else
-    echo ">>> IPTraf lockfile directory $LOCKDIR already exists"
-fi
-$INSTALL -m 0700 -o root -g root -d $LOCKDIR
 echo
 echo
 echo "*** iptraf, and rvnamed executables are in $TARGET"
@@ -56,25 +50,27 @@ echo "*** Log files are placed in $LOGDIR"
 
 ################# Filter clearing for 3.0 ##########################
 
-if [ ! -f $WORKDIR/version ]; then
+if [ ! -f $DESTDIR/$WORKDIR/version ]; then
     echo ">>> Clearing old filter list"
-    if [ -f $WORKDIR/tcpfilters.dat ]; then
-        mv -f $WORKDIR/tcpfilters.dat $WORKDIR/tcpfilters.dat~
+    if [ -f $DESTDIR/$WORKDIR/tcpfilters.dat ]; then
+        mv -f $DESTDIR/$WORKDIR/tcpfilters.dat $DESTDIR/$WORKDIR/tcpfilters.dat~
     fi
     
-    if [ -f $WORKDIR/udpfilters.dat ]; then
-        mv -f $WORKDIR/udpfilters.dat $WORKDIR/udpfilters.dat~
+    if [ -f $DESTDIR/$WORKDIR/udpfilters.dat ]; then
+        mv -f $DESTDIR/$WORKDIR/udpfilters.dat $DESTDIR/$WORKDIR/udpfilters.dat~
     fi
 
-    if [ -f $WORKDIR/othipfilters.dat ]; then
-        mv -f $WORKDIR/othipfilters.dat $WORKDIR/othipfilters.dat~
+    if [ -f $DESTDIR/$WORKDIR/othipfilters.dat ]; then
+        mv -f $DESTDIR/$WORKDIR/othipfilters.dat $DESTDIR/$WORKDIR/othipfilters.dat~
     fi
 
-    rm -f $WORKDIR/savedfilters.dat
+    rm -f $DESTDIR/$WORKDIR/savedfilters.dat
 fi
 ####################################################################
 
-cat version > $WORKDIR/version
+cat version > $DESTDIR/$WORKDIR/version
+
+exit 0
 
 echo 
 echo

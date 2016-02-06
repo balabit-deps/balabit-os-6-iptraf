@@ -32,7 +32,7 @@ details.
 #include <arpa/inet.h>
 #include <net/if_arp.h>
 #include <linux/if_packet.h>
-#include <net/if.h>
+#include <linux/if.h>
 #include <netinet/ip.h>
 #include <netinet/tcp.h>
 #include <netinet/udp.h>
@@ -129,7 +129,7 @@ void initiflist(struct iflist **list)
 {
     FILE *fd;
     char buf[161];
-    char ifname[10];
+    char ifname[18];
     struct iflist *itmp = NULL;
     struct iflist *tail = NULL;
     unsigned int index = 0;
@@ -433,7 +433,7 @@ void ifstats(const struct OPTIONS *options, struct filterstate *ofilter,
     FILE *logfile = NULL;
 
     int br;
-    char ifname[10];
+    char ifname[18];
 
     int ch;
 
@@ -760,7 +760,7 @@ void detstats(char *iface, const struct OPTIONS *options, int facilitytime,
     char *tpacket;
     unsigned int iphlen;
 
-    char ifname[10];
+    char ifname[18];
     struct sockaddr_ll fromaddr;
     unsigned short linktype;
 

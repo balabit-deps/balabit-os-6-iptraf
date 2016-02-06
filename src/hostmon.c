@@ -31,7 +31,7 @@ details.
 #include <linux/if_packet.h>
 #include <linux/if_ether.h>
 #include <linux/if_fddi.h>
-#include <linux/if_tr.h>
+#include <netinet/if_tr.h>
 #include <net/if_arp.h>
 #include <stdlib.h>
 #include <time.h>
@@ -711,7 +711,7 @@ void hostmon(const struct OPTIONS *options, int facilitytime, char *ifptr,
     int is_ip;
     int ch;
 
-    char ifname[10];
+    char ifname[18];
 
     struct timeval tv;
     unsigned long starttime;
@@ -901,8 +901,7 @@ void hostmon(const struct OPTIONS *options, int facilitytime, char *ifptr,
                 continue;
 
             if ((linktype == LINK_ETHERNET) || (linktype == LINK_FDDI)
-                || (linktype == LINK_PLIP) || (linktype == LINK_TR) ||
-                (linktype == LINK_VLAN)) {
+                || (linktype == LINK_PLIP) || (linktype == LINK_TR)) {
 
                 if (fromaddr.sll_protocol == htons(ETH_P_IP))
                     is_ip = 1;
@@ -913,8 +912,7 @@ void hostmon(const struct OPTIONS *options, int facilitytime, char *ifptr,
                  * Check source address entry
                  */
 
-                if ((linktype == LINK_ETHERNET) || (linktype == LINK_PLIP)
-                    || (linktype == LINK_VLAN)) {
+                if ((linktype == LINK_ETHERNET) || (linktype == LINK_PLIP)) {
                     memcpy(scratch_saddr,
                            ((struct ethhdr *) buf)->h_source, ETH_ALEN);
                     memcpy(scratch_daddr, ((struct ethhdr *) buf)->h_dest,

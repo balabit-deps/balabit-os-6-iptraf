@@ -604,7 +604,7 @@ void ipmon(struct OPTIONS *options,
     int curwin = 0;
 
     int readlen;
-    char ifname[10];
+    char ifname[18];
 
     unsigned long long total_pkts = 0;
 

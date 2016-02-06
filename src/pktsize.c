@@ -25,7 +25,7 @@ details.
 #include <sys/time.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
-#include <net/if.h>
+#include <linux/if.h>
 #include <netinet/in.h>
 #include <linux/if_ether.h>
 #include <linux/if_packet.h>

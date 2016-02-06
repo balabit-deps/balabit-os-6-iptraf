@@ -11,5 +11,4 @@
 #define LINK_DLCI		10
 #define LINK_TR			11
 #define LINK_IPIP       12
-#define LINK_VLAN       13
 #define LINK_INVALID		0

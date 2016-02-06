@@ -9,14 +9,12 @@ Copyright (c) Gerard Paul Java 1997
 #include <malloc.h>
 #include <string.h>
 #include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
+#include <linux/socket.h>
 #include <arpa/inet.h>
 #include <netinet/ip_icmp.h>
 #include <netinet/udp.h>
 #include <curses.h>
 #include <panel.h>
-#include <netdb.h>
 #include <linux/if_ether.h>
 #include "servname.h"
 #include "addproto.h"
@@ -42,7 +40,7 @@ struct othptabent {
     int s_fstat;
     int d_fstat;
     unsigned int protocol;
-    char iface[8];
+    char iface[18];
     unsigned int pkt_length;
 
     union {
